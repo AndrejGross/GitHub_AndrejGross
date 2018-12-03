@@ -26,6 +26,34 @@ struct inzeraty* n(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
             if(str[0]=='$')
                 pocetZaznamov++;
     }
+    *pocet_zaznamov=pocetZaznamov;
+    if((prvy=malloc(sizeof(struct inzeraty)))==NULL)
+        return 0;
+    rewind(*file);
+    act=prvy;
+    while(!feof(*file))
+    {
+        fscanf(*file,"%*c");
+        fscanf(*file,"%*c");
+        fscanf(*file,"%[^\n]",act->kategoria);
+        fscanf(*file,"%*c");
+        fscanf(*file,"%[^\n]",act->znacka);
+        fscanf(*file,"%*c");
+        fscanf(*file,"%[^\n]",act->predajca);
+        fscanf(*file,"%*c");
+        fscanf(*file,"%d",&act->cena);
+        fscanf(*file,"%*c");
+        fscanf(*file,"%d",&act->rok_vyroby);
+        fscanf(*file,"%*c");
+        fscanf(*file,"%[^\n]",act->stav_vozidla);
+        fscanf(*file,"%*c");
+
+        if((act->dalsi=malloc(sizeof(struct inzeraty)))==NULL)
+            return 0;
+        act=act->dalsi;
+    }
+    printf("Nacitalo sa %d zaznamov\n",pocetZaznamov);
+    return prvy;
 }
 
 int main()
