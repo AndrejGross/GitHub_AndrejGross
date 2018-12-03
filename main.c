@@ -258,6 +258,7 @@ int main()
     struct inzeraty *prvy;
     struct inzeraty *act;
     struct inzeraty *novy;
+    struct inzeraty *pred;
 
     while(1) //nekonečný cyklus
     {
@@ -269,6 +270,7 @@ int main()
              case('p'): prvy = p(&file,&pocet_zaznamov,prvy,act,novy);break; //vloženie záznamu
              case('h'): prvy = h(&file,prvy,act);break;                      //vyhľadať a vypísať záznamy podľa značky auta a ceny ponuky
              case('a'): prvy = a(&file,&pocet_zaznamov,prvy,act);break;      //aktualizácia záznamu podľa značky auta a roku výroby
+             case('z'): prvy = z(&file,&pocet_zaznamov,prvy,act,pred);break; //mazanie záznamov podľa značky auta
         }
     }
     return 0;
