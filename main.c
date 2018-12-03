@@ -140,6 +140,61 @@ struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     return prvy;
 }
 
+struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
+{
+    char znacka_auta[51],act_znacka[51];
+    int cena_ponuky,poradie=0,i,j=0;
+
+    scanf("%*c");
+    scanf("%[^\n]",znacka_auta); //načítanie značky auta
+    scanf("%*c");
+    scanf("%d",&cena_ponuky); //načítanie ceny
+
+    while(znacka_auta[j]) //zmena na veľké písmená
+        {
+            if(znacka_auta[j]!=' ')
+            {
+                if (znacka_auta[j]<'A'||znacka_auta[j]>'Z')
+                    znacka_auta[j]=znacka_auta[j]-32;
+            }
+            j++;
+        }
+
+    act=prvy;
+    while(act!=NULL)
+    {
+        i=0;
+        sprintf(act_znacka,"%s",act->znacka); //vytvorenie pomocnej pre aktuálnu značku prvku
+
+        while(act_znacka[i])  //zmena na veľké písmená
+        {
+            if(act_znacka[i]!=' ')
+            {
+                 if (act_znacka[i]<'A'||act_znacka[i]>'Z')
+                    act_znacka[i]=act_znacka[i]-32;
+            }
+            i++;
+        }
+
+        if((strcmp(act_znacka,znacka_auta)==0)&&(act->cena<=cena_ponuky))   //ak je lex. dĺžka zhodná
+        {                                                                   //a zároveň cena auta je menšia
+            poradie++;                                                      //alebo rovná zadanej tak záznam vypíše
+            printf("%d.\n",poradie);
+            printf("kategoria: %s\n",act->kategoria);
+            printf("znacka: %s\n",act->znacka);
+            printf("predajca: %s\n",act->predajca);
+            printf("cena: %d\n",act->cena);
+            printf("rok_vyroby: %d\n",act->rok_vyroby);
+            printf("stav_vozidla: %s\n",act->stav_vozidla);
+        }
+        act=act->dalsi;
+    }
+    if(poradie==0) //ak nieje žiadny záznam vyhovujúci
+        printf("V ponuke nie su pozadovane auta\n");
+
+    return prvy;
+}
+
 int main()
 {
     char c;
