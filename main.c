@@ -330,6 +330,7 @@ int main()
              case('h'): prvy = h(&file,prvy,act);break;                      //vyhľadať a vypísať záznamy podľa značky auta a ceny ponuky
              case('a'): prvy = a(&file,&pocet_zaznamov,prvy,act);break;      //aktualizácia záznamu podľa značky auta a roku výroby
              case('z'): prvy = z(&file,&pocet_zaznamov,prvy,act,pred);break; //mazanie záznamov podľa značky auta
+             case('k'): k(&file,prvy,act);break;                             //vyčistenie pamäte, zatvorenie súboru a ukončenie programu
         }
     }
     return 0;
