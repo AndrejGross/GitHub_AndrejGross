@@ -160,6 +160,7 @@ int main()
              case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;      //načítanie záznamov zo súbora
              case('v'): v(&file,&pocet_zaznamov,prvy,act);break;             //výpis záznamov
              case('p'): prvy = p(&file,&pocet_zaznamov,prvy,act,novy);break; //vloženie záznamu
+             case('h'): prvy = h(&file,prvy,act);break;                      //vyhľadať a vypísať záznamy podľa značky auta a ceny ponuky
         }
     }
     return 0;
