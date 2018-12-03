@@ -306,6 +306,18 @@ struct inzeraty* z(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     return prvy;
 }
 
+void k(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
+{
+    if(*file!=NULL)
+        fclose(*file);
+    act=prvy->dalsi;
+    while(act!=NULL)
+    {free(prvy);
+    prvy=act;
+    act=act->dalsi;}
+    exit(EXIT_SUCCESS);
+}
+
 int main()
 {
     char c;
