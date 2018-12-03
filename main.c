@@ -92,14 +92,16 @@ int main()
     //zadefinovanie pointrov na štruktúru
     struct inzeraty *prvy;
     struct inzeraty *act;
+    struct inzeraty *novy;
 
-    while(1) //nekoneèný cyklus
+    while(1) //nekonečný cyklus
     {
-        scanf("%c",&c); //naèítavanie znaku pre volanie funkcie
+        scanf("%c",&c); //načítavanie znaku pre volanie funkcie
         switch(c)       //switch pre vyberanie funkcie
         {
              case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;      //načítanie záznamov zo súbora
              case('v'): v(&file,&pocet_zaznamov,prvy,act);break;             //výpis záznamov
+             case('p'): prvy = p(&file,&pocet_zaznamov,prvy,act,novy);break; //vloženie záznamu
         }
     }
     return 0;
