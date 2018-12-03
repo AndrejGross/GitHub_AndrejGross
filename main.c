@@ -62,6 +62,26 @@ struct inzeraty* n(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     return prvy; //vraciam smernik na prvý záznam
 }
 
+void v(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *act)
+{
+    int poradie=1;
+    act=prvy;
+    while(act!=NULL)
+    {
+        if(poradie==*pocet_zaznamov+1)
+            break;
+        printf("%d.\n",poradie);
+        printf("kategoria: %s\n",act->kategoria);
+        printf("znacka: %s\n",act->znacka);
+        printf("predajca: %s\n",act->predajca);
+        printf("cena: %d\n",act->cena);
+        printf("rok_vyroby: %d\n",act->rok_vyroby);
+        printf("stav_vozidla: %s\n",act->stav_vozidla);
+        act=act->dalsi;
+        poradie++;
+    }
+}
+
 int main()
 {
     char c;
