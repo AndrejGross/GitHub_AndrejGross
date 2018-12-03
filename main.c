@@ -92,6 +92,29 @@ struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
         k=*pocet_zaznamov+1;
     if((novy=malloc(sizeof(struct inzeraty)))==NULL)
        return 0;
+
+    scanf("%*c");
+    scanf("%[^\n]",novy->kategoria);
+    scanf("%*c");
+    scanf("%[^\n]",novy->znacka);
+    scanf("%*c");
+    scanf("%[^\n]",novy->predajca);
+    scanf("%*c");
+    scanf("%d",&novy->cena);
+    scanf("%*c");
+    scanf("%d",&novy->rok_vyroby);
+    scanf("%*c");
+    scanf("%[^\n]",novy->stav_vozidla);
+    scanf("%*c");
+
+    if(*pocet_zaznamov==0) //ak je počet záznamov 0, tak sa nový záznam uloží na prvné miesto
+    {
+        novy->dalsi=NULL;
+        *pocet_zaznamov+=1;
+        return novy;
+
+    }
+        act=prvy;
 }
 
 int main()
