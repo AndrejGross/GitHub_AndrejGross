@@ -15,13 +15,19 @@ struct inzeraty
 int main()
 {
     char c;
+    int pocet_zaznamov=0;
+
+    FILE *file=NULL;
+
+    struct inzeraty *prvy;
+    struct inzeraty *act;
 
     while(1)
     {
         scanf("%c",&c);
         switch(c)
         {
-
+             case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;
         }
     }
     return 0;
