@@ -82,6 +82,64 @@ void v(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *ac
     }
 }
 
+struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *act,struct inzeraty *novy)
+{
+    int k,pocitadlo=0;
+    scanf("%d",&k);
+
+    if(k<=0) //ak je načítané číslo menšie alebo rovné nule, funkcia nepokračuje
+        return 0;
+
+    if(k>*pocet_zaznamov) //ak je počet záznamov väčší ako načítané číslo, záznam sa zapíše na koniec
+        k=*pocet_zaznamov+1;
+
+    if((novy=malloc(sizeof(struct inzeraty)))==NULL)
+       return 0;
+
+//načítavanie nového záznam
+    scanf("%*c");
+    scanf("%[^\n]",novy->kategoria);
+    scanf("%*c");
+    scanf("%[^\n]",novy->znacka);
+    scanf("%*c");
+    scanf("%[^\n]",novy->predajca);
+    scanf("%*c");
+    scanf("%d",&novy->cena);
+    scanf("%*c");
+    scanf("%d",&novy->rok_vyroby);
+    scanf("%*c");
+    scanf("%[^\n]",novy->stav_vozidla);
+    scanf("%*c");
+
+    if(*pocet_zaznamov==0) //ak je počet záznamov 0, tak sa nový záznam uloží na prvné miesto
+    {
+        novy->dalsi=NULL;
+        *pocet_zaznamov+=1;
+        return novy;
+    }
+        act=prvy;
+
+    while(act!=NULL)
+    {
+        pocitadlo++;
+        if(act==prvy&&k==1) //ak chceme uložiť záznam na prvé miesto
+        {
+            novy->dalsi=prvy;
+            prvy=novy;
+        }
+        else
+        if(k==pocitadlo+1) //ak chceme uložiť záznam na hoci aké iné miesto
+        {
+            novy->dalsi=act->dalsi;
+            act->dalsi=novy;
+        }
+
+    act=act->dalsi;
+    }
+    *pocet_zaznamov+=1;
+    return prvy;
+}
+
 int main()
 {
     char c;
