@@ -146,11 +146,11 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
     int cena_ponuky,poradie=0,i,j=0;
 
     scanf("%*c");
-    scanf("%[^\n]",znacka_auta);
+    scanf("%[^\n]",znacka_auta); //načítanie značky auta
     scanf("%*c");
-    scanf("%d",&cena_ponuky);
+    scanf("%d",&cena_ponuky); //načítanie ceny
 
-    while(znacka_auta[j])
+    while(znacka_auta[j]) //zmena na veľké písmená
         {
             if(znacka_auta[j]!=' ')
             {
@@ -159,12 +159,14 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
             }
             j++;
         }
+
     act=prvy;
     while(act!=NULL)
     {
         i=0;
-        sprintf(act_znacka,"%s",act->znacka);
-        while(act_znacka[i])
+        sprintf(act_znacka,"%s",act->znacka); //vytvorenie pomocnej pre aktuálnu značku prvku
+
+        while(act_znacka[i])  //zmena na veľké písmená
         {
             if(act_znacka[i]!=' ')
             {
@@ -173,9 +175,10 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
             }
             i++;
         }
-        if((strcmp(act_znacka,znacka_auta)==0)&&(act->cena<=cena_ponuky))
-        {
-            poradie++;
+
+        if((strcmp(act_znacka,znacka_auta)==0)&&(act->cena<=cena_ponuky))   //ak je lex. dĺžka zhodná
+        {                                                                   //a zároveň cena auta je menšia
+            poradie++;                                                      //alebo rovná zadanej tak záznam vypíše
             printf("%d.\n",poradie);
             printf("kategoria: %s\n",act->kategoria);
             printf("znacka: %s\n",act->znacka);
@@ -183,9 +186,12 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
             printf("cena: %d\n",act->cena);
             printf("rok_vyroby: %d\n",act->rok_vyroby);
             printf("stav_vozidla: %s\n",act->stav_vozidla);
-        }act=act->dalsi;
-    }if(poradie==0)
+        }
+        act=act->dalsi;
+    }
+    if(poradie==0) //ak nieje žiadny záznam vyhovujúci
         printf("V ponuke nie su pozadovane auta\n");
+
     return prvy;
 }
 
