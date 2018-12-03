@@ -12,6 +12,22 @@ struct inzeraty
     struct inzeraty *dalsi;
 };
 
+struct inzeraty* n(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *act)
+{
+    int pocetZaznamov=0;
+    char str[201];
+
+    if((*file=fopen("auta.txt","r"))==NULL)
+        return 0;
+
+    if (*file)
+    {
+        while(fscanf(*file,"%s",str)!=EOF)
+            if(str[0]=='$')
+                pocetZaznamov++;
+    }
+}
+
 int main()
 {
     char c;
