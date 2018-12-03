@@ -159,6 +159,34 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
             }
             j++;
         }
+    act=prvy;
+    while(act!=NULL)
+    {
+        i=0;
+        sprintf(act_znacka,"%s",act->znacka);
+        while(act_znacka[i])
+        {
+            if(act_znacka[i]!=' ')
+            {
+                 if (act_znacka[i]<'A'||act_znacka[i]>'Z')
+                    act_znacka[i]=act_znacka[i]-32;
+            }
+            i++;
+        }
+        if((strcmp(act_znacka,znacka_auta)==0)&&(act->cena<=cena_ponuky))
+        {
+            poradie++;
+            printf("%d.\n",poradie);
+            printf("kategoria: %s\n",act->kategoria);
+            printf("znacka: %s\n",act->znacka);
+            printf("predajca: %s\n",act->predajca);
+            printf("cena: %d\n",act->cena);
+            printf("rok_vyroby: %d\n",act->rok_vyroby);
+            printf("stav_vozidla: %s\n",act->stav_vozidla);
+        }act=act->dalsi;
+    }if(poradie==0)
+        printf("V ponuke nie su pozadovane auta\n");
+    return prvy;
 }
 
 int main()
