@@ -216,6 +216,7 @@ int main()
              case('v'): v(&file,&pocet_zaznamov,prvy,act);break;             //výpis záznamov
              case('p'): prvy = p(&file,&pocet_zaznamov,prvy,act,novy);break; //vloženie záznamu
              case('h'): prvy = h(&file,prvy,act);break;                      //vyhľadať a vypísať záznamy podľa značky auta a ceny ponuky
+             case('a'): prvy = a(&file,&pocet_zaznamov,prvy,act);break;      //aktualizácia záznamu podľa značky auta a roku výroby
         }
     }
     return 0;
