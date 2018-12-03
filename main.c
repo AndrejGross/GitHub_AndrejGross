@@ -266,6 +266,39 @@ struct inzeraty* z(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
         j++;
 
     }
+    act=prvy;
+    while(act!=NULL)
+    {
+        i=0;
+        sprintf(act_znacka,"%s",act->znacka);
+        while(act_znacka[i])
+        {
+            if(act_znacka[i]!=' ')
+            {if (act_znacka[i]<'A'||act_znacka[i]>'Z')
+                    act_znacka[i]=act_znacka[i]-32;}
+        i++;
+        }
+        if(strstr(act_znacka,znacka_auta)!=NULL)
+        {
+            if(act==prvy)
+            {
+                prvy=prvy->dalsi;
+            }
+        else
+            {
+                pred=prvy;
+                while(pred->dalsi!=act)
+                    pred=pred->dalsi;
+                pred->dalsi=act->dalsi;
+            }
+            *pocet_zaznamov-=1;
+            free(act);
+            pocitadlo++;
+        }
+        act=act->dalsi;
+    }
+    printf("Vymazalo sa %d zaznamov\n",pocitadlo);
+    return prvy;
 }
 
 int main()
