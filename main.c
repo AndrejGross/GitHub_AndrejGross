@@ -247,6 +247,65 @@ struct inzeraty* a(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     return prvy;
 }
 
+struct inzeraty* z(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *act,struct inzeraty *pred)
+{
+    int pocitadlo=0,j=0,i;
+    char znacka_auta[51],act_znacka[51];
+
+    scanf("%*c");
+    scanf("%[^\n]",znacka_auta); //načítanie značky auta
+    scanf("%*c");
+
+    while(znacka_auta[j]) //na veľké písmená
+    {
+        if(znacka_auta[j]!=' ')
+        {
+            if (znacka_auta[j]<'A'||znacka_auta[j]>'Z')
+                znacka_auta[j]=znacka_auta[j]-32;
+        }
+        j++;
+
+    }
+
+    act=prvy;
+    while(act!=NULL)
+    {
+        i=0;
+        sprintf(act_znacka,"%s",act->znacka); //vytvorenie pomocnej pre aktuálnu značku auta
+        while(act_znacka[i])
+        {
+            if(act_znacka[i]!=' ')
+            {
+                if (act_znacka[i]<'A'||act_znacka[i]>'Z')
+                    act_znacka[i]=act_znacka[i]-32;
+            }
+            i++;
+        }
+        if(strstr(act_znacka,znacka_auta)!=NULL) //ak sa string znacka_auta nachádza v značke auta aktuálneho záznamu
+        {
+            if(act==prvy) //ak je aktuálny záznam zároveň aj prvý
+            {
+                prvy=prvy->dalsi; //nasledujúci záznam po prvom sa stáva prvým
+            }
+            else
+            {
+                pred=prvy;              //ak nie akt. záznam prvý, tak predchádzajúci je prvý
+                while(pred->dalsi!=act) //kým sa predchádzajúci ďalší nerovná aktuálnemu záznamu
+                    pred=pred->dalsi;   //prehladávanie medzi záznammi
+
+                pred->dalsi=act->dalsi; //ak je predchádzajúci ďalší rovný aktuálnemu záznamu, tak akt. ďalší je pred. ďalší
+            }
+            *pocet_zaznamov-=1; //odpočíta 1 z počtu prvkov
+            free(act);          //odstráň aktuálny záznam
+            pocitadlo++;        //počítadlo pre počet vymazaných záznamov
+        }
+        act=act->dalsi; //prechádzanie záznammi
+    }
+    printf("Vymazalo sa %d zaznamov\n",pocitadlo);
+
+    return prvy;
+}
+
 int main()
 {
     char c;
