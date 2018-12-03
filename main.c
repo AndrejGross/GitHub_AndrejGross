@@ -78,7 +78,8 @@ int main()
         scanf("%c",&c); //naèítavanie znaku pre volanie funkcie
         switch(c)       //switch pre vyberanie funkcie
         {
-             case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;      //naèítanie záznamov zo súbora
+             case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;      //načítanie záznamov zo súbora
+             case('v'): v(&file,&pocet_zaznamov,prvy,act);break;             //výpis záznamov
         }
     }
     return 0;
