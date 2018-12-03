@@ -195,6 +195,58 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
     return prvy;
 }
 
+struct inzeraty* a(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *act)
+{
+    int rokVyroby,pocitadlo=0,j=0,i;
+    char znacka_auta[51],act_znacka[51];
+
+    scanf("%*c");
+    scanf("%[^\n]",znacka_auta);
+    scanf("%*c");
+    scanf("%d",&rokVyroby);
+
+    if(*pocet_zaznamov==0) //ak je počet záznamov 0, funkcia nepokračuje
+        {
+            printf("Aktualizovalo sa %d zaznamov\n",pocitadlo);
+            return 0;
+        }
+
+    act=prvy;
+
+    while(znacka_auta[j]) //na veľké písmená
+        {
+            if (znacka_auta[j]<'A'||znacka_auta[j]>'Z')
+                znacka_auta[j]=znacka_auta[j]-32;
+            j++;
+        }
+
+    while(act!=NULL)
+    {
+        i=0;
+        sprintf(act_znacka,"%s",act->znacka); //vytvorenie pomocnej pre aktuálnu značku
+
+        while(act_znacka[i]) //na veľké písmená
+        {
+            if (act_znacka[i]<'A'||act_znacka[i]>'Z')
+                act_znacka[i]=act_znacka[i]-32;
+            i++;
+        }
+
+        if(strcmp(act_znacka,znacka_auta)==0&&act->rok_vyroby==rokVyroby)   //ak je lex. dĺžka zhodná
+        {                                                                   //a zadaný rok výroby sa zhoduje
+            if(act->cena-100<0)                                             //s rokom výroby auta tak sa záznam vypíše
+                act->cena=0;
+                else
+                act->cena-=100;
+            pocitadlo++; //počítadlo pre vyhovujúce záznamy
+        }
+    act=act->dalsi;
+    }
+    printf("Aktualizovalo sa %d zaznamov\n",pocitadlo);
+
+    return prvy;
+}
+
 int main()
 {
     char c;
