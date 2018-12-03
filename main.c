@@ -253,10 +253,10 @@ struct inzeraty* z(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     char znacka_auta[51],act_znacka[51];
 
     scanf("%*c");
-    scanf("%[^\n]",znacka_auta);
+    scanf("%[^\n]",znacka_auta); //načítanie značky auta
     scanf("%*c");
 
-    while(znacka_auta[j])
+    while(znacka_auta[j]) //na veľké písmená
     {
         if(znacka_auta[j]!=' ')
         {
@@ -266,38 +266,43 @@ struct inzeraty* z(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
         j++;
 
     }
+
     act=prvy;
     while(act!=NULL)
     {
         i=0;
-        sprintf(act_znacka,"%s",act->znacka);
+        sprintf(act_znacka,"%s",act->znacka); //vytvorenie pomocnej pre aktuálnu značku auta
         while(act_znacka[i])
         {
             if(act_znacka[i]!=' ')
-            {if (act_znacka[i]<'A'||act_znacka[i]>'Z')
-                    act_znacka[i]=act_znacka[i]-32;}
-        i++;
+            {
+                if (act_znacka[i]<'A'||act_znacka[i]>'Z')
+                    act_znacka[i]=act_znacka[i]-32;
+            }
+            i++;
         }
-        if(strstr(act_znacka,znacka_auta)!=NULL)
+        if(strstr(act_znacka,znacka_auta)!=NULL) //ak sa string znacka_auta nachádza v značke auta aktuálneho záznamu
         {
-            if(act==prvy)
+            if(act==prvy) //ak je aktuálny záznam zároveň aj prvý
             {
-                prvy=prvy->dalsi;
+                prvy=prvy->dalsi; //nasledujúci záznam po prvom sa stáva prvým
             }
-        else
+            else
             {
-                pred=prvy;
-                while(pred->dalsi!=act)
-                    pred=pred->dalsi;
-                pred->dalsi=act->dalsi;
+                pred=prvy;              //ak nie akt. záznam prvý, tak predchádzajúci je prvý
+                while(pred->dalsi!=act) //kým sa predchádzajúci ďalší nerovná aktuálnemu záznamu
+                    pred=pred->dalsi;   //prehladávanie medzi záznammi
+
+                pred->dalsi=act->dalsi; //ak je predchádzajúci ďalší rovný aktuálnemu záznamu, tak akt. ďalší je pred. ďalší
             }
-            *pocet_zaznamov-=1;
-            free(act);
-            pocitadlo++;
+            *pocet_zaznamov-=1; //odpočíta 1 z počtu prvkov
+            free(act);          //odstráň aktuálny záznam
+            pocitadlo++;        //počítadlo pre počet vymazaných záznamov
         }
-        act=act->dalsi;
+        act=act->dalsi; //prechádzanie záznammi
     }
     printf("Vymazalo sa %d zaznamov\n",pocitadlo);
+
     return prvy;
 }
 
