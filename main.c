@@ -112,9 +112,26 @@ struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
         novy->dalsi=NULL;
         *pocet_zaznamov+=1;
         return novy;
-
     }
         act=prvy;
+        while(act!=NULL)
+    {
+        pocitadlo++;
+        if(act==prvy&&k==1)
+        {
+            novy->dalsi=prvy;
+            prvy=novy;
+        }
+        else
+        if(k==pocitadlo+1)
+        {
+            novy->dalsi=act->dalsi;
+            act->dalsi=novy;
+        }
+    act=act->dalsi;
+    }
+    *pocet_zaznamov+=1;
+    return prvy;
 }
 
 int main()
