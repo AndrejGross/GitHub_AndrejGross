@@ -140,6 +140,27 @@ struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     return prvy;
 }
 
+struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
+{
+    char znacka_auta[51],act_znacka[51];
+    int cena_ponuky,poradie=0,i,j=0;
+
+    scanf("%*c");
+    scanf("%[^\n]",znacka_auta);
+    scanf("%*c");
+    scanf("%d",&cena_ponuky);
+
+    while(znacka_auta[j])
+        {
+            if(znacka_auta[j]!=' ')
+            {
+                if (znacka_auta[j]<'A'||znacka_auta[j]>'Z')
+                    znacka_auta[j]=znacka_auta[j]-32;
+            }
+            j++;
+        }
+}
+
 int main()
 {
     char c;
