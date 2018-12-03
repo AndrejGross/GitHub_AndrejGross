@@ -12,3 +12,17 @@ struct inzeraty
     struct inzeraty *dalsi;
 };
 
+int main()
+{
+    char c;
+
+    while(1)
+    {
+        scanf("%c",&c);
+        switch(c)
+        {
+
+        }
+    }
+    return 0;
+}
