@@ -17,17 +17,18 @@ int main()
     char c;
     int pocet_zaznamov=0;
 
-    FILE *file=NULL;
+    FILE *file=NULL; //zadefinovanie súboru
 
+    //zadefinovanie pointrov na štruktúru
     struct inzeraty *prvy;
     struct inzeraty *act;
 
-    while(1)
+    while(1) //nekoneèný cyklus
     {
-        scanf("%c",&c);
-        switch(c)
+        scanf("%c",&c); //naèítavanie znaku pre volanie funkcie
+        switch(c)       //switch pre vyberanie funkcie
         {
-             case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;
+             case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;      //naèítanie záznamov zo súbora
         }
     }
     return 0;
