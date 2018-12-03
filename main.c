@@ -195,6 +195,24 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
     return prvy;
 }
 
+struct inzeraty* a(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *act)
+{
+    int rokVyroby,pocitadlo=0,j=0,i;
+    char znacka_auta[51],act_znacka[51];
+    scanf("%*c");
+    scanf("%[^\n]",znacka_auta);
+    scanf("%*c");
+    scanf("%d",&rokVyroby);
+    if(*pocet_zaznamov==0)
+        {printf("Aktualizovalo sa %d zaznamov\n",pocitadlo);
+        return 0;}
+    act=prvy;
+    while(znacka_auta[j])
+        {if (znacka_auta[j]<'A'||znacka_auta[j]>'Z')
+                znacka_auta[j]=znacka_auta[j]-32;
+                j++;}
+}
+
 int main()
 {
     char c;
