@@ -308,14 +308,18 @@ struct inzeraty* z(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
 
 void k(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
 {
-    if(*file!=NULL)
+    if(*file!=NULL) //ak bol súbor otvorený, tak súbor zavrie
         fclose(*file);
+
+//mazanie záznamov
     act=prvy->dalsi;
     while(act!=NULL)
-    {free(prvy);
-    prvy=act;
-    act=act->dalsi;}
-    exit(EXIT_SUCCESS);
+    {
+        free(prvy);
+        prvy=act;
+        act=act->dalsi;
+    }
+    exit(EXIT_SUCCESS); //ukončenie programu
 }
 
 int main()
