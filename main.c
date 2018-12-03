@@ -86,13 +86,17 @@ struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
 {
     int k,pocitadlo=0;
     scanf("%d",&k);
-    if(k<=0)
+
+    if(k<=0) //ak je načítané číslo menšie alebo rovné nule, funkcia nepokračuje
         return 0;
-    if(k>*pocet_zaznamov)
+
+    if(k>*pocet_zaznamov) //ak je počet záznamov väčší ako načítané číslo, záznam sa zapíše na koniec
         k=*pocet_zaznamov+1;
+
     if((novy=malloc(sizeof(struct inzeraty)))==NULL)
        return 0;
 
+//načítavanie nového záznam
     scanf("%*c");
     scanf("%[^\n]",novy->kategoria);
     scanf("%*c");
@@ -114,20 +118,22 @@ struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
         return novy;
     }
         act=prvy;
-        while(act!=NULL)
+
+    while(act!=NULL)
     {
         pocitadlo++;
-        if(act==prvy&&k==1)
+        if(act==prvy&&k==1) //ak chceme uložiť záznam na prvé miesto
         {
             novy->dalsi=prvy;
             prvy=novy;
         }
         else
-        if(k==pocitadlo+1)
+        if(k==pocitadlo+1) //ak chceme uložiť záznam na hoci aké iné miesto
         {
             novy->dalsi=act->dalsi;
             act->dalsi=novy;
         }
+
     act=act->dalsi;
     }
     *pocet_zaznamov+=1;
