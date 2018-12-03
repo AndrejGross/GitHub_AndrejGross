@@ -17,21 +17,25 @@ struct inzeraty* n(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     int pocetZaznamov=0;
     char str[201];
 
-    if((*file=fopen("auta.txt","r"))==NULL)
+    if((*file=fopen("auta.txt","r"))==NULL) //otvorenie súboru + kontrola
         return 0;
 
+//počítanie záznamov na základe výskytu znaku $
     if (*file)
     {
         while(fscanf(*file,"%s",str)!=EOF)
             if(str[0]=='$')
                 pocetZaznamov++;
     }
-    *pocet_zaznamov=pocetZaznamov;
-    if((prvy=malloc(sizeof(struct inzeraty)))==NULL)
+    *pocet_zaznamov=pocetZaznamov; //počet záznamov priradím smerníku
+
+    rewind(*file); //na zažiatok súboru
+
+    if((prvy=malloc(sizeof(struct inzeraty)))==NULL) //alokujem prvy záznam
         return 0;
-    rewind(*file);
+
     act=prvy;
-    while(!feof(*file))
+    while(!feof(*file)) //po koniec súboru načítava hodnoty zo súbora do záznamov
     {
         fscanf(*file,"%*c");
         fscanf(*file,"%*c");
@@ -48,12 +52,14 @@ struct inzeraty* n(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
         fscanf(*file,"%[^\n]",act->stav_vozidla);
         fscanf(*file,"%*c");
 
-        if((act->dalsi=malloc(sizeof(struct inzeraty)))==NULL)
+        if((act->dalsi=malloc(sizeof(struct inzeraty)))==NULL) //alokujem miesto pre ďalši záznam
             return 0;
-        act=act->dalsi;
+
+        act=act->dalsi; //posúvanie sa v medzi záznammi
     }
     printf("Nacitalo sa %d zaznamov\n",pocetZaznamov);
-    return prvy;
+
+    return prvy; //vraciam smernik na prvý záznam
 }
 
 int main()
@@ -61,18 +67,18 @@ int main()
     char c;
     int pocet_zaznamov=0;
 
-    FILE *file=NULL; //zadefinovanie s�boru
+    FILE *file=NULL; //zadefinovanie súboru
 
-    //zadefinovanie pointrov na �trukt�ru
+    //zadefinovanie pointrov na štruktúru
     struct inzeraty *prvy;
     struct inzeraty *act;
 
-    while(1) //nekone�n� cyklus
+    while(1) //nekoneèný cyklus
     {
-        scanf("%c",&c); //na��tavanie znaku pre volanie funkcie
+        scanf("%c",&c); //naèítavanie znaku pre volanie funkcie
         switch(c)       //switch pre vyberanie funkcie
         {
-             case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;      //na��tanie z�znamov zo s�bora
+             case('n'): prvy = n(&file,&pocet_zaznamov,prvy,act);break;      //naèítanie záznamov zo súbora
         }
     }
     return 0;
