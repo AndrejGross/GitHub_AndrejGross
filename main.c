@@ -82,6 +82,18 @@ void v(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *ac
     }
 }
 
+struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct inzeraty *act,struct inzeraty *novy)
+{
+    int k,pocitadlo=0;
+    scanf("%d",&k);
+    if(k<=0)
+        return 0;
+    if(k>*pocet_zaznamov)
+        k=*pocet_zaznamov+1;
+    if((novy=malloc(sizeof(struct inzeraty)))==NULL)
+       return 0;
+}
+
 int main()
 {
     char c;
