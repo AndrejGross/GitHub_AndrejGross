@@ -140,16 +140,9 @@ struct inzeraty* p(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     return prvy;
 }
 
-struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
+char* velkePismena(char *znacka_auta)
 {
-    char znacka_auta[51],act_znacka[51];
-    int cena_ponuky,poradie=0,i,j=0;
-
-    scanf("%*c");
-    scanf("%[^\n]",znacka_auta); //načítanie značky auta
-    scanf("%*c");
-    scanf("%d",&cena_ponuky); //načítanie ceny
-
+    int j=0;
     while(znacka_auta[j]) //zmena na veľké písmená
         {
             if(znacka_auta[j]!=' ')
@@ -158,7 +151,28 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
                     znacka_auta[j]=znacka_auta[j]-32;
             }
             j++;
-        }
+        }printf("%s\n",znacka_auta);
+    return znacka_auta;
+}
+
+char* nacitanieZnacky(char *znacka_auta)
+{
+    scanf("%*c");
+    scanf("%[^\n]",znacka_auta);
+    scanf("%*c");
+
+    return znacka_auta;
+}
+
+struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
+{
+    char znacka_auta[51],act_znacka[51];
+    int cena_ponuky,poradie=0,i,j=0;
+
+    znacka_auta==nacitanieZnacky(znacka_auta); //načítanie značky auta
+    scanf("%d",&cena_ponuky); //načítanie ceny
+
+    znacka_auta==velkePismena(znacka_auta);
 
     act=prvy;
     while(act!=NULL)
@@ -166,15 +180,7 @@ struct inzeraty* h(FILE **file,struct inzeraty *prvy,struct inzeraty *act)
         i=0;
         sprintf(act_znacka,"%s",act->znacka); //vytvorenie pomocnej pre aktuálnu značku prvku
 
-        while(act_znacka[i])  //zmena na veľké písmená
-        {
-            if(act_znacka[i]!=' ')
-            {
-                 if (act_znacka[i]<'A'||act_znacka[i]>'Z')
-                    act_znacka[i]=act_znacka[i]-32;
-            }
-            i++;
-        }
+        act_znacka==velkePismena(act_znacka);
 
         if((strcmp(act_znacka,znacka_auta)==0)&&(act->cena<=cena_ponuky))   //ak je lex. dĺžka zhodná
         {                                                                   //a zároveň cena auta je menšia
@@ -200,9 +206,7 @@ struct inzeraty* a(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     int rokVyroby,pocitadlo=0,j=0,i;
     char znacka_auta[51],act_znacka[51];
 
-    scanf("%*c");
-    scanf("%[^\n]",znacka_auta);
-    scanf("%*c");
+    znacka_auta==nacitanieZnacky(znacka_auta); //načítanie značky auta
     scanf("%d",&rokVyroby);
 
     if(*pocet_zaznamov==0) //ak je počet záznamov 0, funkcia nepokračuje
@@ -213,24 +217,14 @@ struct inzeraty* a(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
 
     act=prvy;
 
-    while(znacka_auta[j]) //na veľké písmená
-        {
-            if (znacka_auta[j]<'A'||znacka_auta[j]>'Z')
-                znacka_auta[j]=znacka_auta[j]-32;
-            j++;
-        }
+    znacka_auta==velkePismena(znacka_auta);
 
     while(act!=NULL)
     {
         i=0;
         sprintf(act_znacka,"%s",act->znacka); //vytvorenie pomocnej pre aktuálnu značku
 
-        while(act_znacka[i]) //na veľké písmená
-        {
-            if (act_znacka[i]<'A'||act_znacka[i]>'Z')
-                act_znacka[i]=act_znacka[i]-32;
-            i++;
-        }
+        act_znacka==velkePismena(act_znacka);
 
         if(strcmp(act_znacka,znacka_auta)==0&&act->rok_vyroby==rokVyroby)   //ak je lex. dĺžka zhodná
         {                                                                   //a zadaný rok výroby sa zhoduje
@@ -252,35 +246,18 @@ struct inzeraty* z(FILE **file,int *pocet_zaznamov,struct inzeraty *prvy,struct 
     int pocitadlo=0,j=0,i;
     char znacka_auta[51],act_znacka[51];
 
-    scanf("%*c");
-    scanf("%[^\n]",znacka_auta); //načítanie značky auta
-    scanf("%*c");
+    znacka_auta==nacitanieZnacky(znacka_auta); //načítanie značky auta
 
-    while(znacka_auta[j]) //na veľké písmená
-    {
-        if(znacka_auta[j]!=' ')
-        {
-            if (znacka_auta[j]<'A'||znacka_auta[j]>'Z')
-                znacka_auta[j]=znacka_auta[j]-32;
-        }
-        j++;
-
-    }
+    znacka_auta==velkePismena(znacka_auta); //na veľké písmená
 
     act=prvy;
     while(act!=NULL)
     {
         i=0;
         sprintf(act_znacka,"%s",act->znacka); //vytvorenie pomocnej pre aktuálnu značku auta
-        while(act_znacka[i])
-        {
-            if(act_znacka[i]!=' ')
-            {
-                if (act_znacka[i]<'A'||act_znacka[i]>'Z')
-                    act_znacka[i]=act_znacka[i]-32;
-            }
-            i++;
-        }
+
+        act_znacka==velkePismena(act_znacka);
+
         if(strstr(act_znacka,znacka_auta)!=NULL) //ak sa string znacka_auta nachádza v značke auta aktuálneho záznamu
         {
             if(act==prvy) //ak je aktuálny záznam zároveň aj prvý
